@@ -40,6 +40,9 @@ class CreateTableActors extends Migration
     public function down()
     {
         //
+        if (Schema::hasTable('actors')) {
+            Schema::drop('actors');
+        }
     }
 
 }
