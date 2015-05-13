@@ -36,6 +36,9 @@ class CreateTableManufacturers extends Migration
     public function down()
     {
         //
+         if (Schema::hasTable('manufacturers')) {
+            Schema::drop('manufacturers');
+        }
     }
 
 }
