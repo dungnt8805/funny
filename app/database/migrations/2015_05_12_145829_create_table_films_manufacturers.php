@@ -31,6 +31,9 @@ class CreateTableFilmsManufacturers extends Migration {
 	public function down()
 	{
 		//
+		if (Schema::hasTable('films_manufacturers')) {
+			Schema::drop('films_manufacturers');
+		}
 	}
 
 }
