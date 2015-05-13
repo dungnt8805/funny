@@ -39,6 +39,9 @@ class CreateTableCategories extends Migration
     public function down()
     {
         //
+        if (Schema::hasTable('categories')) {
+            Schema::drop('categories');
+        }
     }
 
 }
