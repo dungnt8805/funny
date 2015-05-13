@@ -40,6 +40,9 @@ class CreateTableDirectors extends Migration
     public function down()
     {
         //
+        if (Schema::hasTable('directors')) {
+            Schema::drop('directors');
+        }
     }
 
 }
