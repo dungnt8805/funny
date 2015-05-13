@@ -54,6 +54,9 @@ class CreateTableFilms extends Migration
     public function down()
     {
         //
+        if (Schema::hasTable('films')) {
+            Schema::drop('films');
+        }
     }
 
 }
