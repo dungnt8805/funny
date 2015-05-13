@@ -4,6 +4,8 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge"/>
     <title>@yield('title')</title>
+
+    <meta name="csrf_token" content="{{csrf_token()}}"/>
     <link href="{{asset('resources/components/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('resources/components/bootstrap/css/bootstrap-social.css')}}" rel="stylesheet"/>
     <link href="{{asset('resources/components/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet"/>
