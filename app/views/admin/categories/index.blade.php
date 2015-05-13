@@ -58,34 +58,56 @@
                         </div>
                     @endif
                     {{ Form::open(array('class'=>'form-horizontal'))}}
-                    <div class="form-group">
-                        <label for="title" class="col-lg-2 control-label">{{ trans('admin.general.title') }}</label>
+                        <div class="form-group">
+                            <label for="name" class="col-lg-2 control-label">{{ trans('admin.general.title') }}</label>
 
-                        <div class="col-lg-10">
-                            {{ Form::text('title',Input::get('title',''),array('class'=>'form-control'))}}
+                            <div class="col-lg-10">
+                                {{ Form::text('title',null,array('class'=>'form-control'))}}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="thumbnail"
-                               class="col-lg-2 control-label">{{trans('admin.general.thumbnail')}}</label>
+                        <div class="form-group">
+                            <label for="name" class="col-lg-2 control-label">{{ trans('admin.general.thumbnail') }}</label>
 
-                        <div class="col-lg-10">
-                            {{Form::text('thumbnail',Input::get('thumbnail',''),['class'=>'form-control'])}}
+                            <div class="col-lg-10">
+                                {{ Form::text('thumbnail',null,array('class'=>'form-control'))}}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="url" class="col-lg-2 control-label">{{ trans('admin.general.description') }}</label>
+                        <div class="form-group">
+                            <label for="name" class="col-lg-2 control-label">{{ trans('admin.general.keywords') }}</label>
 
-                        <div class="col-lg-10">
-                            {{ Form::textarea('description',Input::get('description',''),array('class'=>'form-control','rows'=>'4'))}}
+                            <div class="col-lg-10">
+                                {{ Form::text('keywords',null,array('class'=>'form-control'))}}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            {{ Form::submit('Create',array('class'=>'btn btn-lg btn-primary btn-block')); }}
+                        <div class="form-group">
+                            <label for="name" class="col-lg-2 control-label">{{ trans('admin.general.lead') }}</label>
+
+                            <div class="col-lg-10">
+                                {{ Form::textarea('lead',null,array('class'=>'form-control','rows'=>4))}}
+                            </div>
                         </div>
-                    </div>
-                    {{ Form::close()}}
+                        <div class="form-group">
+                            <label for="description"
+                                   class="col-lg-2 control-label">{{ trans('admin.general.position') }}</label>
+
+                            <div class="col-lg-10">
+                                {{ Form::text('position',null,array('class'=>'form-control','rows'=>'5'))}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description"
+                                   class="col-lg-2 control-label">{{ trans('admin.general.status') }}</label>
+
+                            <div class="col-lg-10">
+                                {{ Form::select('hidden',status_show_hidden(),null,array('class'=>'form-control')) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                {{ Form::submit( trans('admin.nations.save') ,array('class'=>'btn btn-primary btn-block')); }}
+                            </div>
+                        </div>
+                        {{ Form::close()}}
                 </div>
             </div>
             <!-- /.modal-content -->

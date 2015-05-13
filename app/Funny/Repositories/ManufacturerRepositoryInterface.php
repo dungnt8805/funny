@@ -30,10 +30,11 @@ interface ManufacturerRepositoryInterface {
      * Create an actor in database
      *
      * @param array $data
+     * @param bool $full
      * @return \Funny\Manufacturer
      */
 
-    public function create(array $data);
+    public function create(array $data, $full = false);
 
     /**
      * Update an specified actor from database

@@ -11,9 +11,13 @@ namespace Funny\Repositories\Eloquent;
 
 use Funny\Film;
 use Funny\Repositories\FilmRepositoryInterface;
+use Funny\Services\Forms\FilmForm;
 
 class FilmRepository extends AbstractRepository implements FilmRepositoryInterface
 {
+
+    const is_series = 1;
+    const no_series = 0;
 
     public function __construct(Film $film)
     {
@@ -49,6 +53,54 @@ class FilmRepository extends AbstractRepository implements FilmRepositoryInterfa
      */
     public function create(array $data)
     {
-        // TODO: Implement create() method.
+        $film = $this->getNew();
+        $film->title = e($data['title']);
+        $film->slug = \Str::slug($film->title);
+        $film->eng_title = e($data['eng_title']);
+        $film->durations = e($data['durations']);
+        $film->year = e($data['year']);
+        $film->multi = !empty($data['multi']) ? $data['multi'] : 0;
+        $film->hot = !empty($data['hot']) ? $data['hot'] : 0;
+        $film->nation_id = $data['nation_id'];
+        $film->trailer = $data['trailer'];
+        $film->thumbnail = $data['thumbnail'];
+        $film->imdb = $data['imdb'];
+        $film->imdb_score = $data['imdb_score'];
+        $film->short_description = $data['imdb_score'];
+        $film->short_description = $data['imdb_score'];
+        $film->quality = $data['quality'];
+        $film->keywords = $data['keywords'];
+
+        $film->save();
+        return $film;
+    }
+
+    /**
+     * Find film by conditions
+     * @param array $data
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\Paginator|\Funny\Film
+     */
+    public function findAll(array $data)
+    {
+        $query = $this->model;
+        if (key_exists('is_series', $data))
+            $query = $query->where('films.multi', '=', 1);
+        if (array_key_exists('is_hot', $data))
+            $query = $query->where('films.hot', '=', 1);
+        if (array_key_exists('year', $data)) {
+            $query = $query->where('films.year', '=', $data['year']);
+        }
+        if (array_key_exists('nation', $data))
+            $query = $query->where('films.nation_id', '=', $data['nation']);
+
+        $query = $query->join('nations', 'nations.id', '=', 'films.nation_id');
+
+        $films = $query->paginate(20);
+        return $films;
+    }
+
+    public function getForm()
+    {
+        return new FilmForm;
     }
 }

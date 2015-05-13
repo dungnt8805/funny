@@ -33,4 +33,11 @@ interface FilmRepositoryInterface
      * @return \Funny\Film
      */
     public function create(array $data);
+
+    /**
+     * Find film by conditions
+     * @param array $data
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\Paginator|\Funny\Film
+     */
+    public function findAll(array $data);
 }

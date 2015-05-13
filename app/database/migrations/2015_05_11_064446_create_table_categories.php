@@ -24,6 +24,7 @@ class CreateTableCategories extends Migration
                 $table->string('description');
                 $table->string('lead');
                 $table->string('thumbnail');
+                $table->tinyInteger('position')->default(0);
                 $table->tinyInteger('status')->default(1);
                 $table->timestamps();
                 $table->softDeletes();

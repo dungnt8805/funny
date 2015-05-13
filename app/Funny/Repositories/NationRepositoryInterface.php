@@ -13,10 +13,10 @@ interface NationRepositoryInterface
 {
     /**
      * Get an array of key-value (id=>name) pairs of all nations
-     *
+     * @param array $data
      * @return array
      */
-    public function listAll();
+    public function listAll($data = array());
 
     /**
      * Create a new Nation in database
@@ -49,5 +49,5 @@ interface NationRepositoryInterface
      *
      * return \Illuminate\Database\Eloquent\Collection|\Funny\Category[]
      */
-    public function findAll();
+    public function findAll(array $conditions);
 }

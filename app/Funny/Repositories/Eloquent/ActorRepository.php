@@ -46,16 +46,17 @@ class ActorRepository extends AbstractRepository implements ActorRepositoryInter
      * Create an actor in database
      *
      * @param array $data
+     * @param bool $full
      * @return \Funny\Actor
      */
-    public function create(array $data)
+    public function create(array $data, $full = true)
     {
         $actor = $this->getNew();
 
         $actor->name = e($data['name']);
         $actor->slug = Str::slug($actor->title);
         $actor->nation_id = !empty($data['nation_id']) ? $data['nation_id'] : 0;
-        $actor->avatar = !empty($data['avatar']) ? $data['avatar'] : 0;
+        $actor->avatar = !empty($data['avatar']) ? $data['avatar'] : "";
         $actor->birth_date = !empty($data['birth_date']) ? $data['birth_date'] : 0;
         $actor->birth_month = !empty($data['birth_month']) ? $data['birth_month'] : 0;
         $actor->birth_year = !empty($data['birth_year']) ? $data['birth_year'] : 0;

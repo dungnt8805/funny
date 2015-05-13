@@ -19,6 +19,7 @@ class CreateTableManufacturers extends Migration
                 $table->increments('id');
                 $table->string('name');
                 $table->string('slug');
+                $table->string('lowercase');
                 $table->string('avatar');
                 $table->string('year')->default(0);
                 $table->text('bio');
@@ -36,7 +37,7 @@ class CreateTableManufacturers extends Migration
     public function down()
     {
         //
-         if (Schema::hasTable('manufacturers')) {
+        if (Schema::hasTable('manufacturers')) {
             Schema::drop('manufacturers');
         }
     }

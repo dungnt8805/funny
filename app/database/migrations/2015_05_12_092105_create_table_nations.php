@@ -20,7 +20,7 @@ class CreateTableNations extends Migration
                 $table->string('name');
                 $table->string('vi_name');
                 $table->string('code');
-                $table->tinyInteger('hidden')->default(1);
+                $table->tinyInteger('status')->default(0);
                 $table->tinyInteger('has_film')->default(0);
                 $table->tinyInteger('position')->default(0);
                 $table->index('name', 'code', 'vi_name');

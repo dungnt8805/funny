@@ -25,7 +25,7 @@ class NationsController extends AdminController
 
     public function getIndex()
     {
-        $nations = $this->objNation->findAll();
+        $nations = $this->objNation->findAll(['has_film' => 1, 'order' => ['field' => 'position', 'asc' => 'asc']]);
         return View::make('admin/nations/index', compact('nations'));
     }
 

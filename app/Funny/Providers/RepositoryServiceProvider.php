@@ -34,5 +34,9 @@ class RepositoryServiceProvider extends ServiceProvider
             'Funny\Repositories\NationRepositoryInterface',
             'Funny\Repositories\Eloquent\NationRepository'
         );
+        $this->app->bind(
+            'Funny\Repositories\FilmRepositoryInterface',
+            'Funny\Repositories\Eloquent\FilmRepository'
+        );
     }
 }

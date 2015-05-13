@@ -24,11 +24,16 @@ class NationRepository extends AbstractRepository implements NationRepositoryInt
     /**
      * Get an array of key-value (id=>name) pairs of all nations
      *
+     * @param array $data
      * @return array
      */
-    public function listAll()
+    public function listAll($data = array())
     {
-        return $this->model->lists('name', 'id');
+        $query = $this->model;
+        if (key_exists('has_film', $data))
+            $query = $query->where('has_film', '=', 1);
+
+        return $query->lists('name', 'id');
     }
 
     /**
@@ -43,6 +48,9 @@ class NationRepository extends AbstractRepository implements NationRepositoryInt
 
         $nation->name = e($data['name']);
         $nation->position = $data['position'];
+        $nation->vi_name = e($data['vi_name']);
+        $nation->hidden = $data['hidden'];
+        $nation->has_film = $data['has_film'];
         $nation->save();
 
         return $nation;
@@ -60,6 +68,9 @@ class NationRepository extends AbstractRepository implements NationRepositoryInt
         $nation = $this->findById($id);
 
         $nation->name = e($data['name']);
+        $nation->vi_name = e($data['vi_name']);
+        $nation->hidden = $data['hidden'];
+        $nation->has_film = $data['has_film'];
         $nation->position = $data['position'];
         $nation->save();
 
@@ -79,15 +90,24 @@ class NationRepository extends AbstractRepository implements NationRepositoryInt
 
     /**
      * find all nations
-     * @param
+     *
+     * @param array $conditions
      *
      * return \Illuminate\Database\Eloquent\Collection|\Funny\Nation[]
      */
-    public function findAll()
+    public function findAll(array $conditions)
     {
-        $nations =  $this->model->get();
+        $query = $this->model;
+        if (key_exists('has_film', $conditions))
+            $query = $query->where('has_film', '=', $conditions['has_film']);
+        if (key_exists('hidden', $conditions))
+            $query = $query->where('hidden', '=', $conditions['hidden']);
+        if (key_exists('order', $conditions))
+            $query = $query->orderBy($conditions['order']['field'], $conditions['order']['asc']);
+        $nations = $query->get();
         return $nations;
     }
+
 
     public function getForm()
     {

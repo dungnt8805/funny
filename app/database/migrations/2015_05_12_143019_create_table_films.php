@@ -22,6 +22,7 @@ class CreateTableFilms extends Migration
                 $table->string('eng_title');
                 $table->tinyInteger('nation_id');
                 $table->string('thumbnail');
+                $table->string('keywords');
                 $table->string('quality', 10)->default('HD');
                 $table->text('description');
                 $table->text('short_description');

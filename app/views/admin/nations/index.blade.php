@@ -14,6 +14,8 @@
                     <thead>
                     <tr>
                         <th>{{ trans('admin.general.name') }}</th>
+                        <th>{{ trans('admin.general.vi_name') }}</th>
+                        <th>{{ trans('admin.general.status') }}</th>
                         <th>{{ trans('admin.general.position') }}</th>
                         <th class="col-lg-3 text-right">{{ trans('admin.actions.actions') }}</th>
                     </tr>
@@ -23,6 +25,8 @@
                         <tr rel="{{ $nation->id }}">
                             <td><a href="{{url('admin/nations/view/'.$nation->id)}}">{{ $nation->name }}</a>
                             </td>
+                            <td>{{$nation->vi_name}}</td>
+                            <td>{{status_show_hidden($nation->status)}}</td>
                             <td>{{ $nation->position}}<br>
                             </td>
                             <td>

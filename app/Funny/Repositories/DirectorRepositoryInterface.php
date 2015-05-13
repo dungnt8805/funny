@@ -9,7 +9,8 @@
 namespace Funny\Repositories;
 
 
-interface DirectorRepositoryInterface {
+interface DirectorRepositoryInterface
+{
     /**
      * Find a actor by id
      *
@@ -30,10 +31,11 @@ interface DirectorRepositoryInterface {
      * Create an actor in database
      *
      * @param array $data
+     * @param bool $full
      * @return \Funny\Director
      */
 
-    public function create(array $data);
+    public function create(array $data, $full = false);
 
     /**
      * Update an specified actor from database

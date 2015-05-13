@@ -27,6 +27,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         'getIndex' => 'admin.nations.index',
         'getView' => 'admin.nations.view'
     ]);
+    Route::controller('films', 'FilmsController', [
+        'getIndex' => 'admin.films.index',
+        'getView' => 'admin.films.view',
+        'getNew' => 'admin.films.new'
+    ]);
 });
 
 

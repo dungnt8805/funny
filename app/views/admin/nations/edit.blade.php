@@ -5,7 +5,9 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="page-header">
-                    <h1>{{ trans('admin.nations.edit') }} <a href="{{ url('admin/nations')}}" class="btn btn-lg btn-default pull-right">{{ trans('admin.general.cancel') }}</a></h1>
+                    <h1>{{ trans('admin.nations.edit') }} <a href="{{ url('admin/nations')}}"
+                                                             class="btn btn-lg btn-default pull-right">{{ trans('admin.general.cancel') }}</a>
+                    </h1>
                 </div>
 
                 @if($errors->all())
@@ -18,14 +20,40 @@
                 {{ Form::model($nation,array('class'=>'form-horizontal'))}}
                 <div class="form-group">
                     <label for="name" class="col-lg-2 control-label">{{ trans('admin.general.name') }}</label>
+
                     <div class="col-lg-10">
                         {{ Form::text('name',null,array('class'=>'form-control'))}}
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="description" class="col-lg-2 control-label">{{ trans('admin.general.position') }}</label>
+                    <label for="name" class="col-lg-2 control-label">{{ trans('admin.general.vi_name') }}</label>
+
+                    <div class="col-lg-10">
+                        {{ Form::text('vi_name',null,array('class'=>'form-control'))}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description"
+                           class="col-lg-2 control-label">{{ trans('admin.general.position') }}</label>
+
                     <div class="col-lg-10">
                         {{ Form::text('position',null,array('class'=>'form-control','rows'=>'5'))}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description"
+                           class="col-lg-2 control-label">{{ trans('admin.general.has_film') }}</label>
+
+                    <div class="col-lg-2">
+                        {{ Form::checkbox('has_film',1,null,array('class'=>'form-control')) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description"
+                           class="col-lg-2 control-label">{{ trans('admin.general.status') }}</label>
+
+                    <div class="col-lg-10">
+                        {{ Form::select('hidden',status_show_hidden(),null,array('class'=>'form-control')) }}
                     </div>
                 </div>
                 <div class="form-group">
