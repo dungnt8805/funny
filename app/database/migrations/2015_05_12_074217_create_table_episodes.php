@@ -39,6 +39,9 @@ class CreateTableEpisodes extends Migration
     public function down()
     {
         //
+        if (Schema::hasTable('episodes')) {
+            Schema::drop('episodes');
+        }
     }
 
 }
