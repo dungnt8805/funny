@@ -72,4 +72,13 @@ class FilmsController extends AdminController
         $data = ['nations' => $nations, 'categories' => $categories, 'film' => $film];
         return View::make('admin.films.edit', compact('data'));
     }
+
+    public function postView($id)
+    {
+        $form = $this->objFilm->getForm();
+        if (!$form->isValid())
+            return Redirect::back()->withInput()->withErrors($form->getErrors());
+        $film = $this->objFilm->update($id, $form->getInputData());
+        return Redirect::route('admin.films.view', $film->id);
+    }
 }

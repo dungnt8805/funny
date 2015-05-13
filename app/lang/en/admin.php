@@ -36,6 +36,8 @@ return [
         'studios' => 'Studios',
         'short_description' => 'Short Description',
         'please_fix_errors' => 'Please fix the errors below:',
+        'categories' => 'Categories',
+        'episode' => 'Episode',
     ],
     'actions' => [
         'actions' => 'Actions',

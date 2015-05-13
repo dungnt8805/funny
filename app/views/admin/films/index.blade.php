@@ -13,24 +13,39 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th class="span1"></th>
+                        <th class="col-lg-2">{{trans('admin.general.thumbnail')}}</th>
                         <th>{{ trans('admin.general.title') }}</th>
-                        <th>{{ trans('admin.general.description') }}</th>
-                        <th>{{ trans('admin.num_of_tricks') }}</th>
+                        <th>{{ trans('admin.general.categories') }}</th>
+                        <th class="text-right">{{ trans('admin.general.episode') }}</th>
                         <th class="col-lg-3 text-right">{{ trans('admin.actions.actions') }}</th>
                     </tr>
                     </thead>
                     <tbody id="sortable">
                     @foreach($data['films'] as $film)
                         <tr rel="{{ $film->id }}">
-                            <td><a href="{{url('admin/films/view/'.$category->id)}}">{{ $film->title }}</a>
-                            </td>
-                            <td>{{ $film->description}}<br>
+                            <td></td>
+                            <td>{{HTML::image(tim_thumb($film->thumbnail,51,70))}}</td>
+                            <td>
+                                <strong>
+                                    <a href="{{url('admin/films/view/'.$film->id)}}">{{ $film->title }}</a>
+                                </strong>
                             </td>
                             <td></td>
                             <td>
                                 <div class="btn-group pull-right">
+                                    <a class="btn btn-sm btn-info" href="">
+                                        <i class="fa fa-list"></i> episodes
+                                    </a>
+                                    <a class="btn btn-sm btn-success" href="">
+                                        <i class="fa fa-plus"></i> add new episode
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-group pull-right">
                                     <a class="btn btn-primary btn-sm"
-                                       href="{{url('admin/categories/view/'.$film->id)}}">{{ trans('admin.actions.edit') }}</a>
+                                       href="{{url('admin/films/view/'.$film->id)}}">{{ trans('admin.actions.edit') }}</a>
                                     <a class="delete_toggler btn btn-danger btn-sm"
                                        rel="{{$film->id}}">{{ trans('admin.actions.delete') }}</a>
                                 </div>

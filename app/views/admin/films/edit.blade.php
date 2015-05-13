@@ -129,18 +129,17 @@
 
                     <div class="col-lg-10">
                         {{Form::text('actors',null,['class'=>'form-control'])}}
-                        {{Form::text('actors',null,['class'=>'form-control'])}}
                     </div>
                 </div>
 
-                <div class="form-group">
+                {{--<div class="form-group">
                     <label for="description"
                            class="col-lg-2 control-label">{{ trans('admin.general.status') }}</label>
 
                     <div class="col-lg-10">
-                        {{ Form::select('hidden',status_show_hidden(),null,array('class'=>'form-control')) }}
+                        {{ Form::select('status',status_show_hidden(),null,array('class'=>'form-control')) }}
                     </div>
-                </div>
+                </div>--}}
                 <div class="form-group">
                     <label for="name" class="col-lg-2 control-label">{{ trans('admin.general.keywords') }}</label>
 

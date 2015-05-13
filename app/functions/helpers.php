@@ -47,3 +47,19 @@ if (!function_exists('film_quality')) {
         return $quality == null ? $array : $array[$quality];
     }
 }
+
+if (!function_exists('tim_thumb')) {
+    function tim_thumb($link, $width = 100, $height = 100, $zc = 1)
+    {
+        $url = $link;
+        if (
+            strtolower(substr($link, 0, 7)) == 'http://' ||
+            strtolower(substr($link, 0, 8)) == 'https://' ||
+            strtolower(substr($link, 0, 4)) == 'www.'
+        ) {
+            $url = $link;
+        } else
+            $url = Config::get('app.url') . $link;
+        return Config::get('app.url') . '/thumb.php?src=' . urlencode($url) . '&w=' . $width . '&h=' . $height . '&zc=' . $zc;
+    }
+}

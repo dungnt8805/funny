@@ -26,6 +26,7 @@ class CreateTableFilms extends Migration
                 $table->string('quality', 10)->default('HD');
                 $table->text('description');
                 $table->text('short_description');
+                $table->text('images');
                 $table->integer('durations');
                 $table->integer('director_id');
                 $table->string('year');
@@ -33,9 +34,9 @@ class CreateTableFilms extends Migration
                 $table->tinyInteger('multi')->default(0);
                 $table->integer('views')->default(0);
                 $table->tinyInteger('awards');
-                $table->float('imdb_score');
+                $table->string('imdb_score', 4);
                 $table->string('imdb');
-                $table->float('rate');
+                $table->string('rate');
                 $table->integer('view_day')->default(0);
                 $table->integer('view_week')->default(0);
                 $table->integer('view_month')->default(0);

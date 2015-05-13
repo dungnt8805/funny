@@ -35,6 +35,16 @@ interface FilmRepositoryInterface
     public function create(array $data);
 
     /**
+     * Update a specified film from database
+     *
+     * @param int $id
+     * @param array $data
+     * @return \Funny\Film
+     */
+
+    public function update($id,$data);
+
+    /**
      * Find film by conditions
      * @param array $data
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\Paginator|\Funny\Film

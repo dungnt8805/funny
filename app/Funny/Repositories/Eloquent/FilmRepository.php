@@ -66,8 +66,8 @@ class FilmRepository extends AbstractRepository implements FilmRepositoryInterfa
         $film->thumbnail = $data['thumbnail'];
         $film->imdb = $data['imdb'];
         $film->imdb_score = $data['imdb_score'];
-        $film->short_description = $data['imdb_score'];
-        $film->short_description = $data['imdb_score'];
+        $film->short_description = $data['short_description'];
+//        $film->status = $data['status'];
         $film->quality = $data['quality'];
         $film->keywords = $data['keywords'];
 
@@ -95,6 +95,7 @@ class FilmRepository extends AbstractRepository implements FilmRepositoryInterfa
 
         $query = $query->join('nations', 'nations.id', '=', 'films.nation_id');
 
+        $query = $query->select('films.*');
         $films = $query->paginate(20);
         return $films;
     }
@@ -102,5 +103,37 @@ class FilmRepository extends AbstractRepository implements FilmRepositoryInterfa
     public function getForm()
     {
         return new FilmForm;
+    }
+
+    /**
+     * Update a specified film from database
+     *
+     * @param int $id
+     * @param array $data
+     * @return \Funny\Film
+     */
+    public function update($id, $data)
+    {
+        $film = $this->findById($id);
+
+        $film->title = e($data['title']);
+        $film->slug = \Str::slug($film->title);
+        $film->eng_title = e($data['eng_title']);
+        $film->durations = e($data['durations']);
+        $film->year = e($data['year']);
+        $film->multi = !empty($data['multi']) ? $data['multi'] : 0;
+        $film->hot = !empty($data['hot']) ? $data['hot'] : 0;
+        $film->nation_id = $data['nation_id'];
+        $film->trailer = $data['trailer'];
+        $film->thumbnail = $data['thumbnail'];
+        $film->imdb = $data['imdb'];
+        $film->imdb_score = $data['imdb_score'];
+        $film->short_description = $data['short_description'];
+//        $film->status = $data['status'];
+        $film->quality = $data['quality'];
+        $film->keywords = $data['keywords'];
+
+        $film->save();
+        return $film;
     }
 }
