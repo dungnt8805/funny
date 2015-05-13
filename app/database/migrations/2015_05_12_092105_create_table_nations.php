@@ -32,6 +32,9 @@ class CreateTableNations extends Migration
     public function down()
     {
         //
+        if (Schema::hasTable('nations')) {
+            Schema::drop('nations');
+        }
     }
 
 }
