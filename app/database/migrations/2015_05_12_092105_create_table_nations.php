@@ -23,6 +23,7 @@ class CreateTableNations extends Migration
                 $table->tinyInteger('hidden')->default(1);
                 $table->tinyInteger('has_film')->default(0);
                 $table->tinyInteger('position')->default(0);
+                $table->index('name', 'code', 'vi_name');
                 $table->timestamps();
             });
         }
