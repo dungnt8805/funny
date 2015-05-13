@@ -32,6 +32,9 @@ class CreateTableFilmsActors extends Migration
     public function down()
     {
         //
+        if (Schema::hasTable('films_actors')) {
+            Schema::drop('films_actors');
+        }
     }
 
 }
