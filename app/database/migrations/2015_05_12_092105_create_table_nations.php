@@ -18,7 +18,11 @@ class CreateTableNations extends Migration
             Schema::create('nations', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
-                $table->tinyInteger('position');
+                $table->string('vi_name');
+                $table->string('code');
+                $table->tinyInteger('hidden')->default(1);
+                $table->tinyInteger('has_film')->default(0);
+                $table->tinyInteger('position')->default(0);
                 $table->timestamps();
             });
         }
