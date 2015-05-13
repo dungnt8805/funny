@@ -23,6 +23,8 @@ class CreateTableFilms extends Migration
                 $table->tinyInteger('nation_id');
                 $table->string('thumbnail');
                 $table->string('quality', 10)->default('HD');
+                $table->text('description');
+                $table->text('short_description');
                 $table->integer('durations');
                 $table->integer('director_id');
                 $table->string('year');
