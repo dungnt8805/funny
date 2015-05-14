@@ -44,6 +44,7 @@ class EpisodeRepository extends AbstractRepository implements EpisodeRepositoryI
     public function create(array $data){
         $episode = $this->getNew();
         
+        $episode->film_id = $data['film_id'];
         
     }
 
@@ -55,5 +56,8 @@ class EpisodeRepository extends AbstractRepository implements EpisodeRepositoryI
      * @param array $data
      * @return \Funny\Episode
      */
-    public function update($id,array $data);
+    public function update($id,array $data){
+        $episode = $this->findById($id);
+        
+    }
 }
