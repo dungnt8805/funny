@@ -22,7 +22,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             'getView' => 'admin.categories.view'
         ]
     );
-
     Route::controller('nations', 'NationsController', [
         'getIndex' => 'admin.nations.index',
         'getView' => 'admin.nations.view'

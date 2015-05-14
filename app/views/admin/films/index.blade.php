@@ -56,28 +56,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="add_category" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">{{ trans('admin.films.add') }}</h4>
-                </div>
-                <div class="modal-body">
-                    @if($errors->all())
-                        <div class="bs-callout bs-callout-danger">
-                            <h4>{{ trans('admin.general.please_fix_errors') }}</h4>
-                            {{ HTML::ul($errors->all())}}
-                        </div>
-                    @endif
-
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    
     <!-- Modal -->
     <div class="modal fade" id="delete_category" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
@@ -103,9 +82,6 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            @if($errors->all())
-            $('#add_category').modal('show');
-            @endif
              // Populate the field with the right data for the modal when clicked
             $('.delete_toggler').each(function (index, elem) {
                 $(elem).click(function (e) {

@@ -19,5 +19,23 @@ interface EpisodeRepositoryInterface
      */
 
     public function findById($id);
+    
+    /**
+     * Create new Episode
+     * 
+     * @param array $data
+     * @return \Funny\Episode
+     */
+    
+    public function create(array $data);
 
+
+    /**
+     * Update episode from database
+     * 
+     * @param int $id
+     * @param array $data
+     * @return \Funny\Episode
+     */
+    public function update($id,array $data);
 }
