@@ -33,4 +33,27 @@ class EpisodeRepository extends AbstractRepository implements EpisodeRepositoryI
     {
         return $this->model->find($id);
     }
+    
+     /**
+     * Create new Episode
+     * 
+     * @param array $data
+     * @return \Funny\Episode
+     */
+    
+    public function create(array $data){
+        $episode = $this->getNew();
+        
+        
+    }
+
+
+    /**
+     * Update episode from database
+     * 
+     * @param int $id
+     * @param array $data
+     * @return \Funny\Episode
+     */
+    public function update($id,array $data);
 }
