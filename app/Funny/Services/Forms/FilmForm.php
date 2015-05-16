@@ -12,4 +12,6 @@ namespace Funny\Services\Forms;
 class FilmForm extends AbstractForm
 {
     protected $rules = ['title' => 'required', 'eng_title' => 'required', 'durations' => "required", 'year' => 'required|integer', 'thumbnail' => 'required'];
+    
+    
 }

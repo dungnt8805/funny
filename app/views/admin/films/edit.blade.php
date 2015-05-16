@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-9">
                 <div class="page-header">
                     <h1>{{ trans('admin.films.edit') }} <a href="{{ url('admin/films')}}"
                                                            class="btn btn-lg btn-warning pull-right">{{ trans('admin.general.cancel') }}</a>
@@ -53,19 +53,36 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="categories" class="col-lg-2 control-label">
+                        {{trans('admin.general.categories')}}
+                    </label>
+                    <div class="col-lg-10">
+                        @foreach($data['categories'] as $key => $value)
+                        <div class="col-sm-5 col-lg-4">
+                            <label class="col-sm-9 col-lg-8 control-label">
+                                {{$value}}
+                            </label>
+                            <div class="col-sm-1 col-lg-3">
+                                {{Form::checkbox('categories[]',$key,in_array($key,$data['selectedCategories'])?true:null,['class'=>'form-control'])}}
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="form-group">
 
                 </div>
                 <div class="form-group">
                     <label for="is_series"
                            class="col-lg-2 control-label">{{trans('admin.general.is_series')}}</label>
 
-                    <div class="col-lg-2">
+                    <div class="col-sm-1 col-lg-1">
                         {{Form::checkbox('multi',1,null,['class'=>'form-control'])}}
                     </div>
                     <label for="is_series"
                            class="col-lg-2 control-label">{{trans('admin.general.hot')}}</label>
 
-                    <div class="col-lg-2">
+                    <div class="col-sm-1 col-lg-1">
                         {{Form::checkbox('hot',1,null,['class'=>'form-control'])}}
                     </div>
                 </div>
@@ -112,7 +129,7 @@
                            class="col-lg-2 control-label">{{trans('admin.general.director')}}</label>
 
                     <div class="col-lg-10">
-                        {{Form::text('director',null,['class'=>'form-control'])}}
+                        {{Form::text('director',null,['class'=>'form-control','id'=>'director_select'])}}
                     </div>
                 </div>
                 <div class="form-group">
@@ -163,4 +180,34 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#director_select').autocomplete({
+              source:function(request,response){
+                  $.ajax({
+                     dataType:"json",
+                     type:"POST",
+                     url:'/admin/films/directors',
+                     data:{
+                         _token:$('input[name="csrf_token"]').val(),
+                         term:request.term
+                     },
+                     success:function(data){
+                         var suggestions = [];
+                         $.each(data, function(i, val){                              
+                            suggestions.push(val.name);
+                        //  response(data);
+                         });
+                         response(suggestions);
+                     }
+                  });
+              },
+              minLength:2,
+              select: function (event, ui)
+                {
+                    console.log(ui);
+                }
+           }); 
+        });
+    </script>
 @stop

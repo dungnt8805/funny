@@ -50,4 +50,12 @@ interface FilmRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\Paginator|\Funny\Film
      */
     public function findAll(array $data);
+    
+    /**
+     * Get categories of one object from database 
+     * 
+     * 
+     * 
+     */
+     public function categories();
 }

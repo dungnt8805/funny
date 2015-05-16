@@ -41,6 +41,7 @@ class DirectorRepository extends AbstractRepository implements DirectorRepositor
     public function listAll()
     {
         // TODO: Implement listAll() method.
+        return $this->model->lists('name','id');
     }
 
     /**
@@ -77,6 +78,10 @@ class DirectorRepository extends AbstractRepository implements DirectorRepositor
     public function update($id, array $data)
     {
         // TODO: Implement update() method.
+    }
+    
+    public function filterByTerm($term){
+        return $this->model->where('name','LIKE',"%".$term."%")->limit(10)->select('id','name')->get();
     }
 
     public function getForm()

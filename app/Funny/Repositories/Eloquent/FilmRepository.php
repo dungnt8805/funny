@@ -136,4 +136,14 @@ class FilmRepository extends AbstractRepository implements FilmRepositoryInterfa
         $film->save();
         return $film;
     }
+    
+    /**
+     * Get categories of one object from database 
+     * 
+     * 
+     * 
+     */
+     public function categories(){
+         return $this->_categories()->get();
+     }
 }

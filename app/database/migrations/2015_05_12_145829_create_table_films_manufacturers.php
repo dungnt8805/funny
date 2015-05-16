@@ -17,7 +17,7 @@ class CreateTableFilmsManufacturers extends Migration {
 			Schema::create('films_manufacturers', function (Blueprint $table) {
 				$table->increments('id');
 				$table->integer('film_id');
-				$table->integer('actor_id');
+				$table->integer('manufacturer_id');
 				$table->timestamps();
 			});
 		}
