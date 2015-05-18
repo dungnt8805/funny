@@ -20,6 +20,7 @@
     <script src="{{asset('resources/components/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('resources/components/material/js/ripples.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('resources/components/bootstrap/js/material.min.js')}}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{asset('resources/components/tag-it/js/tag-it.min.js')}}"></script>
 </head>
 <body>
 <div id="wrap">

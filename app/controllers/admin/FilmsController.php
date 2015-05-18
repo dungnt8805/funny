@@ -118,10 +118,9 @@ class FilmsController extends AdminController
         $directors = $this->dri->filterByTerm(e($term));
         return Response::json($directors);
     }
-    public function getDirectors($term){
+    public function getDirectors(){
+        $term = e(Input::get('term'));
         $directors = $this->dri->filterByTerm(e($term));
-        return Response::json($directors);
-        $directors = $this->dri->listAll();
         return Response::json($directors);
     }
 
