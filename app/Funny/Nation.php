@@ -14,4 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 class Nation extends Model
 {
     protected $table = 'nations';
+
+    const cache_key = 'NATION_LIST';
 }

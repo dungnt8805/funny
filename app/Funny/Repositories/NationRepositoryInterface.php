@@ -9,6 +9,8 @@
 namespace Funny\Repositories;
 
 
+use Illuminate\Support\Facades\Cache;
+
 interface NationRepositoryInterface
 {
     /**
@@ -45,9 +47,16 @@ interface NationRepositoryInterface
 
     /**
      * find all nations
-     * @param
+     * @param array $conditions
      *
      * return \Illuminate\Database\Eloquent\Collection|\Funny\Category[]
      */
     public function findAll(array $conditions);
+
+    /**
+     * find list nations from database then save to cache
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Cache|\Funny\Nation
+     */
+    public function listNationFromCache();
 }

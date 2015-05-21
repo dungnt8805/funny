@@ -12,6 +12,7 @@ namespace Funny\Repositories\Eloquent;
 use Funny\Nation;
 use Funny\Repositories\NationRepositoryInterface;
 use Funny\Services\Forms\NationForm;
+use Cache;
 
 class NationRepository extends AbstractRepository implements NationRepositoryInterface
 {
@@ -112,5 +113,20 @@ class NationRepository extends AbstractRepository implements NationRepositoryInt
     public function getForm()
     {
         return new NationForm;
+    }
+
+    /**
+     * find list nations from database then save to cache
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Cache|\Funny\Nation
+     */
+    public function listNationFromCache()
+    {
+        $model = $this->model;
+        IF (\Cache::has($model::cache_key))
+            return Cache::get($model::cache_key);
+        $nations = $model->where('has_film', '=', 1)->get();
+        Cache::put($model::cache_key, $nations, 60);
+        return $nations;
     }
 }

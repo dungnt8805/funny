@@ -42,7 +42,7 @@ class DirectorRepository extends AbstractRepository implements DirectorRepositor
     public function listAll()
     {
         // TODO: Implement listAll() method.
-        return $this->model->lists('name','id');
+        return $this->model->lists('name', 'id');
     }
 
     /**
@@ -81,9 +81,32 @@ class DirectorRepository extends AbstractRepository implements DirectorRepositor
     {
         // TODO: Implement update() method.
     }
-    
-    public function filterByTerm($term){
-        return $this->model->where('name','LIKE',"%".$term."%")->limit(10)->select('id','name')->get();
+
+    public function filterByTerm($term)
+    {
+        return $this->model->where('name', 'LIKE', "%" . $term . "%")->limit(10)->select('id', 'name')->get();
+    }
+
+    public function findIdByName($name)
+    {
+        return $this->model->where('lowercase', '=', $name)->select('id')->first();
+    }
+
+    public function stringToArrayId($str)
+    {
+        if ($str != '') {
+            $names = explode(',', $str);
+            $ids = Array();
+            foreach ($names as $name) {
+                if (!is_null($director = $this->findBySlug(Str::slug($name)))) {
+                    $ids[] = $director->id;
+                } else {
+                    $director = $this->create(['name' => $name]);
+                    $ids[] = $director->id;
+                }
+            }
+            return $ids;
+        }
     }
     
     public function findIdByName($name){
@@ -109,5 +132,17 @@ class DirectorRepository extends AbstractRepository implements DirectorRepositor
     public function getForm()
     {
         return new  DirectorForm;
+    }
+
+    /**
+     * Find a director from database by slug
+     *
+     * @param string $slug
+     *
+     * @return \Funny\Director
+     */
+    public function findBySlug($slug)
+    {
+        return $this->model->where('slug', '=', $slug)->select('id')->first();
     }
 }

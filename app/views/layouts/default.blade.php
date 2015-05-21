@@ -18,7 +18,7 @@
     <script src="{{asset('resources/components/jquery-ui.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('resources/components/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('resources/components/material/js/ripples.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('resources/components/bootstrap/js/material.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('resources/components/material/js/material.min.js')}}" type="text/javascript"></script>
     <script type="text/javascript" src="{{asset('resources/funny/base/js/script.js')}}"></script>
 </head>
 <body>

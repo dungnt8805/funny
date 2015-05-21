@@ -36,7 +36,14 @@ interface DirectorRepositoryInterface
      */
 
     public function create(array $data, $full = false);
-
+    /**
+     * Find a director from database by slug
+     *
+     * @param string $slug
+     *
+     * @return \Funny\Director
+     */
+    public function findBySlug($slug);
     /**
      * Update an specified actor from database
      *

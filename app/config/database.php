@@ -54,9 +54,9 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => getenv('IP'),
+			'host'      => 'localhost',
 			'database'  => 'funny',
-			'username'  => getenv('C9_USER'),
+			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
@@ -64,9 +64,9 @@ return array(
 		),
 		'mysql_films'=>array(
 			'driver'=>'mysql',
-			'host'      => getenv('IP'),
-			'database'  => 'films',
-			'username'  => getenv('C9_USER'),
+			'host'      => 'localhost',
+			'database'  => 'film',
+			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'latin1',
 			'collation' => 'latin1_swedish_ci',

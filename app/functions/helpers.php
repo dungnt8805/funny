@@ -60,6 +60,6 @@ if (!function_exists('tim_thumb')) {
             $url = $link;
         } else
             $url = Config::get('app.url') . $link;
-        return Config::get('app.url') . '/thumb.php?src=' . urlencode($url) . '&w=' . $width . '&h=' . $height . '&zc=' . $zc;
+        return Config::get('app.url') . 'thumb.php?src=' . urlencode($url) . '&w=' . $width . '&h=' . $height . '&zc=' . $zc;
     }
 }

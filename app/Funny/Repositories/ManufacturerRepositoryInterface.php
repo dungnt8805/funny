@@ -9,7 +9,8 @@
 namespace Funny\Repositories;
 
 
-interface ManufacturerRepositoryInterface {
+interface ManufacturerRepositoryInterface
+{
     /**
      * Find a actor by id
      *
@@ -44,21 +45,30 @@ interface ManufacturerRepositoryInterface {
      * @return \Funny\Manufacturer
      */
     public function update($id, array $data);
-    
+
     /**
      * Find a manufacturer from database by name
-     * 
+     *
      * @param string $name
-     * 
+     *
      * @return \Funny\Manufacturer
      */
     public function findIdByName($name);
-    
+
+    /**
+     * Find a manufacturer from database by slug
+     *
+     * @param string $slug
+     *
+     * @return \Funny\Manufacturer
+     */
+    public function findBySlug($slug);
+
     /**
      * Find manufacturers from database by name
-     * 
+     *
      * @param array names
-     * 
+     *
      * @return array
      */
     public function stringToArrayId($str);

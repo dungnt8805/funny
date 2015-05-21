@@ -5,3 +5,7 @@ ul.ui-autocomplete li:last-child{border:none;}
 ul.ui-autocomplete li.ui-state-focus{background-color:#fff;}
 
 #content{padding-top:60px; padding-bottom:60px;}
+
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}

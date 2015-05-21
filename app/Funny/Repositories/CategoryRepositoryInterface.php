@@ -68,5 +68,11 @@ interface CategoryRepositoryInterface
      * @return array
      */
     public function listAll();
+    /**
+     * find list nations from database then save to cache
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Cache|\Funny\Category
+     */
+    public function listCategoriesFromCache();
 
 }

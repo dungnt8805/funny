@@ -16,4 +16,5 @@ class Category extends Model
     use SoftDeletingTrait;
     protected $dates = ['deleted_at'];
 
+    const cache_key = 'LIST_CATEGORIES';
 }

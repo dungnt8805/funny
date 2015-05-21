@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return View::make('hello');
-});
+//Route::get('/', function () {
+//    return View::make('hello');
+//});
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::controller('categories', 'CategoriesController',
@@ -31,11 +31,22 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         'getView' => 'admin.films.view',
         'getNew' => 'admin.films.new'
     ]);
+
+    Route::controller('episodes', 'EpisodesController', [
+        'getList' => 'admin.episodes.list',
+        'getNew' => 'admin.episodes.new',
+        'getView' => 'admin.episodes.view'
+    ]);
 });
 
-Route::controller('converts','ConvertsController');
+Route::controller('converts', 'ConvertsController');
 
 
 Route::group(['namespace' => 'Frontend'], function () {
+    # HomesController
+    Route::get('/', ['as' => 'frontend.homes.index', 'uses' => 'HomesController@getIndex']);
+    #
+    Route::get('category/{slug}', ['as' => 'frontend.category.slug', 'uses' => 'CategoriesController@getSlug']);
+
     Route::get('episode/{id}/{slug}', ['as' => 'frontend.episodes.view', 'uses' => 'EpisodesController@getView']);
 });

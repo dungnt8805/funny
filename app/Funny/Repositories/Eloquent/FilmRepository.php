@@ -86,7 +86,7 @@ class FilmRepository extends AbstractRepository implements FilmRepositoryInterfa
     public function findAll(array $data)
     {
         $query = $this->model;
-        if (key_exists('is_series', $data))
+        if (array_key_exists('is_series', $data))
             $query = $query->where('films.multi', '=', 1);
         if (array_key_exists('is_hot', $data))
             $query = $query->where('films.hot', '=', 1);

@@ -38,6 +38,9 @@ return [
         'please_fix_errors' => 'Please fix the errors below:',
         'categories' => 'Categories',
         'episode' => 'Episode',
+        'url' => 'Url',
+        'subtitle' => 'Subtitle',
+        'error' => 'Error'
     ],
     'actions' => [
         'actions' => 'Actions',
@@ -59,4 +62,8 @@ return [
         'save' => 'Save Nation'
     ],
     'films' => ['index' => 'Films', 'add' => 'Add New Film', 'edit' => 'Edit Film Information', 'save' => 'Save Film'],
+    'episodes' => ['index' => 'Episodes', 'add' => 'Add New Episode', 'edit' => 'Edit Episode', 'save' => 'Save Episode'],
+    'errors' => [
+        'not_found' => ['film' => 'Film Not Found']
+    ]
 ];

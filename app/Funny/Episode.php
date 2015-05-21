@@ -17,4 +17,9 @@ class Episode extends Model
     protected $table = 'episodes';
     use SoftDeletingTrait;
     protected $dates = ['created_at'];
+
+    public function film()
+    {
+        return $this->belongsTo('Film', 'film_id', 'id');
+    }
 }

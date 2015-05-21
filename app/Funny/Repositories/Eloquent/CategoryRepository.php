@@ -10,6 +10,7 @@ namespace Funny\Repositories\Eloquent;
 
 
 use Funny\Category;
+use Cache;
 use Funny\Repositories\CategoryRepositoryInterface;
 use Funny\Services\Forms\CategoryForm;
 use Str;
@@ -131,5 +132,22 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
     {
         $category = $this->model->withTrashed()->find($id);
         $category->restore();
+    }
+
+    /**
+     * find list nations from database then save to cache
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|Cache|\Funny\Category
+     */
+    public function listCategoriesFromCache()
+    {
+        $model = $this->model;
+        $key = $model::cache_key;
+
+        if (Cache::has($key))
+            return Cache::get($key);
+        $categories = $model->get();
+        Cache::put($key, $categories, 60);
+        return $categories;
     }
 }

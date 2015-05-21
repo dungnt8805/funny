@@ -1,5 +1,8 @@
 <?php
 
+use Funny\Repositories\CategoryRepositoryInterface as CRInterface;
+use Funny\Repositories\NationRepositoryInterface as NRInterface;
+
 class BaseController extends Controller
 {
 
@@ -29,5 +32,7 @@ class BaseController extends Controller
             $this->layout = View::make($this->layout);
         }
     }
+
+
 
 }

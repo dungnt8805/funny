@@ -77,38 +77,52 @@ class ActorRepository extends AbstractRepository implements ActorRepositoryInter
     {
         // TODO: Implement update() method.
     }
-    
+
     /**
      * Find a manufacturer from database by name
-     * 
+     *
      * @param string $name
-     * 
+     *
      * @return \Funny\Actor
      */
-    public function findIdByName($name){
-        return $this->model->where('lowercase','=',$name)->select('id')->first();
+    public function findIdByName($name)
+    {
+        return $this->model->where('lowercase', '=', $name)->select('id')->first();
     }
-    
+
     /**
      * Find actors from database by name
-     * 
+     *
      * @param array names
-     * 
+     *
      * @return array
      */
-    public function stringToArrayId($str){
-        if($str != ''){
-            $names = explode(',',$str);
+    public function stringToArrayId($str)
+    {
+        if ($str != '') {
+            $names = explode(',', $str);
             $ids = Array();
-            foreach($names as $name){
-                if(!is_null($actor = $this->findIdByName($name))){
+            foreach ($names as $name) {
+                if (!is_null($actor = $this->findBySlug(Str::slug($name)))) {
                     $ids[] = $actor->id;
-                }else{
-                    $actor = $this->create(['name'=>$name]);
+                } else {
+                    $actor = $this->create(['name' => $name]);
                     $ids[] = $actor->id;
                 }
             }
             return $ids;
         }
+    }
+
+    /**
+     * Find a actor from database by slug
+     *
+     * @param string $slug
+     *
+     * @return \Funny\Actor
+     */
+    public function findBySlug($slug)
+    {
+        return $this->model->where('slug', '=', $slug)->select('id')->first();
     }
 }

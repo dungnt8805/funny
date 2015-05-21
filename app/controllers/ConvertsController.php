@@ -5,6 +5,7 @@ use Funny\Repositories\CategoryRepositoryInterface as CRI;
 use Funny\Repositories\DirectorRepositoryInterface as DRI;
 use Funny\Repositories\ActorRepositoryInterface as ARI;
 use Funny\Repositories\ManufacturerRepositoryInterface as MRI;
+use Funny\Repositories\EpisodeRepositoryInterface as ERInterface;
 
 class ConvertsController extends BaseController
 {
@@ -16,8 +17,9 @@ class ConvertsController extends BaseController
     protected $dri;
     protected $mri;
     protected $cri;
+    protected $eri;
 
-    public function __construct(MRI $mri, FRI $fri, CRI $cri, DRI $dri, ARI $ari)
+    public function __construct(MRI $mri, FRI $fri, CRI $cri, DRI $dri, ARI $ari, ERInterface $eri)
     {
         $this->log = new Convert();
         $this->cri = $cri;
@@ -25,6 +27,13 @@ class ConvertsController extends BaseController
         $this->mri = $mri;
         $this->dri = $dri;
         $this->fri = $fri;
+        $this->eri = $eri;
+    }
+
+    public function getIndex()
+    {
+        $function = Input::get('type');
+        return View::make('converts/index', compact('function'));
     }
 
     public function getFilms()
@@ -33,7 +42,7 @@ class ConvertsController extends BaseController
         $films = DB::connection('mysql_films')->table('film')
             ->join('film_info', 'film_info.phimid', '=', 'film.phimid')
             ->select('film.*', 'film_info.phimtxt', 'film_info.phiminfo', 'film_info.phimtag', 'film_info.timkiem')
-            ->orderBy('film.phimid', 'ASC')->skip($skip)->limit(1)
+            ->orderBy('film.phimid', 'ASC')->skip($skip)->limit(10)
             ->get();
         if (count($films) > 0) {
             foreach ($films as $film) {
@@ -44,36 +53,36 @@ class ConvertsController extends BaseController
                     'year' => $film->namsanxuat, 'hot' => $film->phimhot,
                     'views' => $film->viewed, 'nation_id' => $film->quocgia, 'trailer' => $film->trailer,
                     'quality' => $film->chatluong,
-                    'short_description' => iconv('latin1', 'UTF-8//IGNORE', $film->phimtxt), 'thumbnail' => $film->phimimg,
-                    'keywords' => iconv('latin1', 'UTF-8//IGNORE', $film->phimtag),
-                    'imdb' => '', 'imdb_score' => 0,'status'=>1
+                    'short_description' => $film->phimtxt, 'thumbnail' => $film->phimimg,
+                    'keywords' => $film->phimtag, 'multi' => $film->phimbo == 0 ? 0 : 1,
+                    'imdb' => '', 'imdb_score' => 0, 'status' => 1
                 ];
                 $film_save = $this->fri->create($f);
                 if ($film->dienvien != '') {
-                    // $actors_id = $this->ari->stringToArrayId(iconv('latin1', 'UTF-8//IGNORE', $film->dienvien));
-                    // foreach ($actors_id as $aid) {
-                    //     $film_save->actors()->attach($aid);
-                    // }
+                    $actors_id = $this->ari->stringToArrayId($film->dienvien);
+                    foreach ($actors_id as $aid) {
+                        $film_save->actors()->attach($aid);
+                    }
                 }
-                // if ($film->nhasanxuat != '') {
-                //     $actors_id = $this->mri->stringToArrayId(iconv('latin1', 'UTF-8//IGNORE', $film->nhasanxuat));
-                //     foreach ($actors_id as $aid) {
-                //         $film_save->manufacturers()->attach($aid);
-                //     }
-                // }
-                // if ($film->daodien != '') {
-                //     $actors_id = $this->dri->stringToArrayId(iconv('latin1', 'UTF-8//IGNORE', $film->daodien));
-                //     foreach ($actors_id as $aid) {
-                //         $film_save->directors()->attach($aid);
-                //     }
-                // }
-                // if ($film->theloai != '') {
-                //     $actors_id = explode(',', $film->theloai);
-                //     foreach ($actors_id as $aid) {
-                //         if ($aid != '')
-                //             $film_save->_categories()->attach($aid);
-                //     }
-                // }
+                if ($film->nhasanxuat != '') {
+                    $actors_id = $this->mri->stringToArrayId($film->nhasanxuat);
+                    foreach ($actors_id as $aid) {
+                        $film_save->manufacturers()->attach($aid);
+                    }
+                }
+                if ($film->daodien != '') {
+                    $actors_id = $this->dri->stringToArrayId($film->daodien);
+                    foreach ($actors_id as $aid) {
+                        $film_save->directors()->attach($aid);
+                    }
+                }
+                if ($film->theloai != '') {
+                    $actors_id = explode(',', $film->theloai);
+                    foreach ($actors_id as $aid) {
+                        if ($aid != '')
+                            $film_save->_categories()->attach($aid);
+                    }
+                }
                 $skip++;
             }
         } else
@@ -81,6 +90,23 @@ class ConvertsController extends BaseController
         $this->log->saveItem(array('code' => 'films', 'value' => $skip));
         echo $skip;
 
+    }
+
+    public function getEpisodes()
+    {
+        $skip = $this->log->getValue('episodes');
+        $episodes = DB::connection('mysql_films')->table('ep')->skip($skip)->take(100)->get();
+        if (count($episodes) > 0) {
+            $eps = [];
+            foreach ($episodes as $ep) {
+                $eps[] = ['film_id' => $ep->phimid, 'subtitle' => $ep->epsub, 'url' => $ep->epurl, 'error' => $ep->error, 'position' => $ep->epname, 'trailer' => $ep->epdemo];
+                $skip++;
+            }
+            $this->eri->inserts($eps);
+        } else
+            return 'finish';
+        $this->log->saveItem(array('code' => 'episodes', 'value' => $skip));
+        echo $skip;
     }
 }
 

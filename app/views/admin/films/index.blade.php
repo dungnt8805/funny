@@ -59,7 +59,7 @@
                                 </div>
                                 
                                 <div class="btn-group pull-left">
-                                    <a class="btn btn-xs btn-info" href="">
+                                    <a class="btn btn-xs btn-info" href="{{route('admin.episodes.list',$film->id)}}">
                                         <i class="fa fa-list"></i> Episodes
                                     </a>
                                     <a class="btn btn-xs btn-success" href="">
@@ -79,6 +79,7 @@
                         </tr>
                     @endforeach
                 </table>
+                    {{$data['films']->links()}}
                 </div>
             </div>
         </div>
