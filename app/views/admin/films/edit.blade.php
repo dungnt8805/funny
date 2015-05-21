@@ -129,7 +129,7 @@
                            class="col-lg-2 control-label">{{trans('admin.general.director')}}</label>
 
                     <div class="col-lg-10">
-                        {{Form::text('director',null,['class'=>'form-control','id'=>'director_select'])}}
+                        {{Form::text('directors',$data['directors'],['class'=>'form-control','id'=>'director_select'])}}
                     </div>
                 </div>
                 <div class="form-group">
@@ -137,7 +137,7 @@
                            class="col-lg-2 control-label">{{trans('admin.general.studios')}}</label>
 
                     <div class="col-lg-10">
-                        {{Form::text('studios',null,['class'=>'form-control'])}}
+                        {{Form::text('studios',$data['studios'],['class'=>'form-control'])}}
                     </div>
                 </div>
                 <div class="form-group">
@@ -145,7 +145,7 @@
                            class="col-lg-2 control-label">{{trans('admin.general.actors')}}</label>
 
                     <div class="col-lg-10">
-                        {{Form::text('actors',null,['class'=>'form-control'])}}
+                        {{Form::text('actors',$data['actors'],['class'=>'form-control'])}}
                     </div>
                 </div>
 
@@ -181,56 +181,34 @@
         </div>
     </div>
     <script type="text/javascript">
-        $(document).ready(function(){
-          $('#director_select').autocomplete({
-              source:function(request,response){
-                  $.ajax({
-                     dataType:"json",
-                     type:"POST",
-                     url:'/admin/films/directors',
-                     data:{
-                         _token:$('input[name="csrf_token"]').val(),
-                         term:request.term
-                     },
-                     success:function(data){
-                        //  var suggestions = [];
-                        //  $.each(data, function(i, val){                              
-                        //     suggestions.push({val.name,val.id});
-                        // //  response(data);
-                        //  });
-                        //  response(suggestions);
-                        response($.map(data.d, function (item) {
-                            return {
-                                id: item.id,
-                                value: item.name
-                            }
-                        }))
-                     }
-                  });
-              },
-              minLength:2,
-              select: function (event, ui)
-                {
-                    console.log(ui);
-                }
-          }); 
-        });
         // $(document).ready(function(){
-        //     $('#director_select').tagit({
-        //         autocomplete:{
-        //             delay:0,
-        //             minLength:2,
-        //             source:'/admin/films/directors',
-        //             // create:function(){
-        //             //     $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
-        //             //         return $('<li class="user_item">')
-        //             //         .append('<a>' + item.name + '</a>')
-        //             //         .appendTo(ul);
-        //             //     };
-                        
-        //             // }
-        //         }
-        //     })
-        // });
+        //     $('#director_select').autocomplete({
+        //       source:function(request,response){
+        //           $.ajax({
+        //               dataType:"json",
+        //               type:"POST",
+        //               url:"/admin/films/directors",
+        //               data:{
+                           
+        //                     _token:$('input[name="csrf_token"]').val(),
+        //                     term:request.term
+        //               },
+        //               success:function(data){
+        //                   console.log(data);
+        //                   response($.map(data,function(item){
+        //                       return {
+        //                           id:item.id,
+        //                           value:item.name
+        //                       }
+        //                   }))
+        //               }
+        //           });
+        //       },
+        //       select:function(event,ui){
+        //           console.log(ui);
+        //       }
+        //     });
+        // })
     </script>
+    
 @stop

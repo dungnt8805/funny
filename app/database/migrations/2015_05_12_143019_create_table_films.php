@@ -20,6 +20,7 @@ class CreateTableFilms extends Migration
                 $table->string('title');
                 $table->string('slug');
                 $table->string('eng_title');
+                $table->integer('parent_id')->default(0);
                 $table->tinyInteger('nation_id');
                 $table->string('thumbnail');
                 $table->string('keywords');
@@ -28,7 +29,7 @@ class CreateTableFilms extends Migration
                 $table->text('short_description');
                 $table->text('images');
                 $table->integer('durations');
-                $table->integer('director_id');
+                $table->tinyInteger('in_cinema')->default(0);
                 $table->string('year');
                 $table->tinyInteger('hot')->default(0);
                 $table->tinyInteger('multi')->default(0);
@@ -37,10 +38,12 @@ class CreateTableFilms extends Migration
                 $table->string('imdb_score', 4);
                 $table->string('imdb');
                 $table->string('rate');
+                $table->tinyInteger('status')->default(1);
                 $table->integer('view_day')->default(0);
                 $table->integer('view_week')->default(0);
                 $table->integer('view_month')->default(0);
                 $table->string('trailer')->default(null);
+                $table->tinyInteger('is_error')->default(0);
                 $table->timestamps();
                 $table->softDeletes();
                 $table->index('id', 'title', 'eng_title', 'director_id', 'nation_id');

@@ -46,4 +46,22 @@ interface ActorRepositoryInterface
      * @return \Funny\Actor
      */
     public function update($id, array $data);
+    
+    /**
+     * Find an actor from database by name
+     * 
+     * @param string $name
+     * 
+     * @return \Funny\Actor
+     */
+    public function findIdByName($name);
+    
+    /**
+     * Find actors from database by name
+     * 
+     * @param array names
+     * 
+     * @return array
+     */
+    public function stringToArrayId($str);
 }

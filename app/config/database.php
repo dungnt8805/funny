@@ -62,6 +62,16 @@ return array(
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
+		'mysql_films'=>array(
+			'driver'=>'mysql',
+			'host'      => getenv('IP'),
+			'database'  => 'films',
+			'username'  => getenv('C9_USER'),
+			'password'  => '',
+			'charset'   => 'latin1',
+			'collation' => 'latin1_swedish_ci',
+			'prefix'    => 'ipos_',
+		),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',

@@ -44,4 +44,22 @@ interface ManufacturerRepositoryInterface {
      * @return \Funny\Manufacturer
      */
     public function update($id, array $data);
+    
+    /**
+     * Find a manufacturer from database by name
+     * 
+     * @param string $name
+     * 
+     * @return \Funny\Manufacturer
+     */
+    public function findIdByName($name);
+    
+    /**
+     * Find manufacturers from database by name
+     * 
+     * @param array names
+     * 
+     * @return array
+     */
+    public function stringToArrayId($str);
 }

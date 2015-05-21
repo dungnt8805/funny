@@ -54,10 +54,13 @@ class FilmRepository extends AbstractRepository implements FilmRepositoryInterfa
     public function create(array $data)
     {
         $film = $this->getNew();
+        if($data['id'])
+            $film->id = $data['id'];
         $film->title = e($data['title']);
-        $film->slug = \Str::slug($film->title);
+        
         $film->eng_title = e($data['eng_title']);
-        $film->durations = e($data['durations']);
+        $film->slug = \Str::slug($film->eng_title);
+        $film->durations = $data['durations'];
         $film->year = e($data['year']);
         $film->multi = !empty($data['multi']) ? $data['multi'] : 0;
         $film->hot = !empty($data['hot']) ? $data['hot'] : 0;
@@ -67,7 +70,7 @@ class FilmRepository extends AbstractRepository implements FilmRepositoryInterfa
         $film->imdb = $data['imdb'];
         $film->imdb_score = $data['imdb_score'];
         $film->short_description = $data['short_description'];
-//        $film->status = $data['status'];
+        $film->status = $data['status'];
         $film->quality = $data['quality'];
         $film->keywords = $data['keywords'];
 

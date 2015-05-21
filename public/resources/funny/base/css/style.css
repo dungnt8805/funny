@@ -3,3 +3,5 @@ ul.ui-autocomplete{margin:0px; padding:3px; list-style:none; max-width:200px;bac
 ul.ui-autocomplete li{border-bottom: solid 1px #f0f0f0; padding:6px;}
 ul.ui-autocomplete li:last-child{border:none;}
 ul.ui-autocomplete li.ui-state-focus{background-color:#fff;}
+
+#content{padding-top:60px; padding-bottom:60px;}

@@ -45,10 +45,19 @@ class FilmsController extends AdminController
 
     public function getIndex()
     {
+        $type = Input::get('type');
         $nations = $this->nri->listAll(['has_film' => true]);
         $categories = $this->cri->listAll();
-
-        $films = $this->objFilm->findAll([]);
+        
+        $filter = [];
+        if($type == 'hot'){
+            $filter['is_hot'] = 1;
+        }
+        if($type == 'series'){
+            $filter['is_series'] = 1;
+        }
+        
+        $films = $this->objFilm->findAll($filter);
 
         $data = ['nations' => $nations, 'categories' => $categories, 'films' => $films];
         return View::make('admin.films.index', compact('data'));
@@ -62,7 +71,11 @@ class FilmsController extends AdminController
         $categories = $this->cri->listAll();
         $film = new Film();
         $selectedCategories = [];
-        $data = ['nations' => $nations, 'categories' => $categories, 'film' => $film,'selectedCategories'=>$selectedCategories];
+        $data = [
+                'nations' => $nations, 'categories' => $categories,
+                'directors'=>'','actors'=>'','studios'=>'',
+                'film' => $film,'selectedCategories'=>$selectedCategories
+                ];
         return View::make('admin.films.edit', compact('data'));
     }
 
@@ -76,6 +89,30 @@ class FilmsController extends AdminController
         if(!empty($inputs['categories']))
             foreach($inputs['categories'] as $key => $value)
                 $film->categories()->attach($value);
+        // check director of film
+        if(!empty($inputs['directors'])){
+            $directors_id = $this->dri->stringToArrayId($inputs['directors']);
+            $film->directors()->detach();
+            foreach($directors_id as $id){
+                $film->directors()->attach($id);
+            }
+        }
+        
+        if(!empty($inputs['studios'])){
+            $manufacturers_id = $this->mri->stringToArrayId($inputs['studios']);
+            $film->manufacturers()->detach();
+            foreach($manufacturers_id as $id){
+                $film->manufacturers()->attach($id);
+            }
+        }
+        
+        if(!empty($inputs['actors'])){
+            $actors_id = $this->ari->stringToArrayId($inputs['actors']);
+            $film->actors()->detach();
+            foreach($actors_id as $id){
+                $film->actors()->attach($id);
+            }
+        }
         return Redirect::route('admin.films.view', $film->id);
     }
 
@@ -85,10 +122,15 @@ class FilmsController extends AdminController
         $categories = $this->cri->listAll();
         $film = $this->objFilm->findById($id);
         $selectedCategories = $film->listIdCategories();
-        $directors = $film->directors()->get();
-        $actors = $film->actors()->get();
-        $manufacturers = $film->manufacturers()->get();
-        $data = ['nations' => $nations, 'categories' => $categories, 'film' => $film,'selectedCategories'=>$selectedCategories];
+        $directors = implode(',',$film->directors()->lists('name'));
+        $actors = implode(',',$film->actors()->lists('name'));
+        $manufacturers = implode(',',$film->manufacturers()->lists('name'));
+        $data = [
+                'nations' => $nations, 'categories' => $categories,
+                'directors'=>$directors, 'film' => $film,
+                'actors'=>$actors,'studios'=>$manufacturers,
+                'selectedCategories'=>$selectedCategories
+                ];
         return View::make('admin.films.edit', compact('data'));
     }
 
@@ -103,6 +145,36 @@ class FilmsController extends AdminController
             $film->_categories()->detach();
             foreach($inputs['categories'] as $key => $value)
                 $film->_categories()->attach($value);
+        }
+        
+        if(!empty($inputs['directors'])){
+            $directors_id = $this->dri->stringToArrayId($inputs['directors']);
+            $film->directors()->detach();
+            foreach($directors_id as $id){
+                $film->directors()->attach($id);
+            }
+        }else{
+            $film->directors()->detach();
+        }
+        
+        if(!empty($inputs['studios'])){
+            $manufacturers_id = $this->mri->stringToArrayId($inputs['studios']);
+            $film->manufacturers()->detach();
+            foreach($manufacturers_id as $id){
+                $film->manufacturers()->attach($id);
+            }
+        }else{
+            $film->manufacturers()->detach();
+        }
+        
+        if(!empty($inputs['actors'])){
+            $actors_id = $this->ari->stringToArrayId($inputs['actors']);
+            $film->actors()->detach();
+            foreach($actors_id as $id){
+                $film->actors()->attach($id);
+            }
+        }else{
+            $film->actors()->detach();
         }
         return Redirect::route('admin.films.view', $film->id);
     }

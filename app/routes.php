@@ -33,6 +33,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     ]);
 });
 
+Route::controller('converts','ConvertsController');
+
 
 Route::group(['namespace' => 'Frontend'], function () {
     Route::get('episode/{id}/{slug}', ['as' => 'frontend.episodes.view', 'uses' => 'EpisodesController@getView']);

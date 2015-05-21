@@ -12,18 +12,18 @@ class NationsTableSeeder extends Seeder
     {
         DB::table('nations')->delete();
         $nations = [
-            array('code' => 'US', 'name' => 'United States', 'has_film' => 1, 'position' => 1, 'vi_name' => 'Mỹ', 'status' => 1),
-            array('code' => 'CN', 'name' => 'China', 'has_film' => 1, 'position' => 3, 'vi_name' => 'Trung Quốc', 'status' => 1),
-            array('code' => 'FR', 'name' => 'France', 'vi_name' => 'Pháp', 'has_film' => 1, 'position' => 10, 'status' => 1),
-            array('code' => 'HK', 'name' => 'Hong Kong', 'vi_name' => 'Hồng Kông', 'has_film' => 1, 'position' => 6, 'status' => 1),
-            array('code' => 'IN', 'name' => 'India', 'vi_name' => 'Ấn Độ', 'has_film' => 1, 'position' => 7, 'status' => 1),
-            array('code' => 'JP', 'name' => 'Japan', 'has_film' => 1, 'position' => 2, 'vi_name' => 'Nhật Bản', 'status' => 1),
-            array('code' => 'KR', 'name' => 'Korea, Republic of', 'has_film' => 1, 'position' => 4, 'vi_name' => 'Hàn Quốc', 'status' => 1),
-            array('code' => 'RU', 'name' => 'Russian Federation', 'vi_name' => 'Nga', 'has_film' => 1, 'position' => 12, 'status' => 1),
-            array('code' => 'TW', 'name' => 'Taiwan', 'vi_name' => 'Đài Loan', 'has_film' => 1, 'position' => 5, 'status' => 1),
-            array('code' => 'TH', 'name' => 'Thailand', 'vi_name' => 'Thái Lan', 'has_film' => 1, 'position' => 9, 'status' => 1),
-            array('code' => 'GB', 'name' => 'United Kingdom', 'vi_name' => 'Anh', 'has_film' => 1, 'position' => 11, 'status' => 1),
-            array('code' => 'VN', 'name' => 'Vietnam', 'vi_name' => 'Việt Nam', 'has_film' => 1, 'position' => 8, 'status' => 1),
+            ['id' => 1, 'code' => "VN", "name" => "Vietname", 'vi_name' => 'Việt Nam', 'has_film' => 1, 'position' => 1, 'status' => 1],
+            ['id' => 2, 'code' => "CN", "name" => "China", 'vi_name' => 'Trung Quốc', 'has_film' => 1, 'position' => 2, 'status' => 1],
+            ['id' => 3, 'code' => "KR", "name" => "Korea", 'vi_name' => 'Hàn Quốc', 'has_film' => 1, 'position' => 3, 'status' => 1],
+            ['id' => 4, 'code' => "TW", "name" => "Taiwan", 'vi_name' => 'Đài Loan', 'has_film' => 1, 'position' => 4, 'status' => 1],
+            ['id' => 5, 'code' => "DK", "name" => "Hong Kong", 'vi_name' => 'Hồng Kông', 'has_film' => 1, 'position' => 5, 'status' => 1],
+            ['id' => 6, 'code' => "JP", "name" => "Japan", 'vi_name' => 'Nhật Bản', 'has_film' => 1, 'position' => 6, 'status' => 1],
+            ['id' => 7, 'code' => "US", "name" => "United States", 'vi_name' => 'Mỹ', 'has_film' => 1, 'position' => 7, 'status' => 1],
+            ['id' => 8, 'code' => "TH", "name" => "Thailand", 'vi_name' => 'Thái Lan', 'has_film' => 1, 'position' => 8, 'status' => 1],
+            ['id' => 9, 'code' => "IN", "name" => "India", 'vi_name' => 'Ấn Độ', 'has_film' => 1, 'position' => 9, 'status' => 1],
+            ['id' => 10, 'code' => "FR", "name" => "France", 'vi_name' => 'Pháp', 'has_film' => 1, 'position' => 10, 'status' => 1],
+            ['id' => 12, 'code' => "ES", "name" => "Spain", 'vi_name' => 'Tây Ban Nha', 'has_film' => 1, 'position' => 11, 'status' => 1],
+            ['id' => 13, 'code' => "UK", "name" => "United Kingdom", 'vi_name' => 'Anh', 'has_film' => 1, 'position' => 12, 'status' => 1],
         ];
         DB::table('nations')->insert($nations);
 

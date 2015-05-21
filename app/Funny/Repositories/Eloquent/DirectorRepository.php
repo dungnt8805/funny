@@ -12,6 +12,7 @@ namespace Funny\Repositories\Eloquent;
 use Funny\Director;
 use Funny\Repositories\DirectorRepositoryInterface;
 use Funny\Services\Forms\DirectorForm;
+use Str;
 
 class DirectorRepository extends AbstractRepository implements DirectorRepositoryInterface
 {
@@ -57,6 +58,7 @@ class DirectorRepository extends AbstractRepository implements DirectorRepositor
 
         $director->name = e($data['name']);
         $director->slug = \Str::slug($director->name);
+        $director->lowercase = Str::lower($director->name);
         $director->nation_id = !empty($data['nation_id']) ? $data['nation_id'] : 0;
         $director->avatar = !empty($data['avatar']) ? $data['avatar'] : "";
         $director->birth_date = !empty($data['birth_date']) ? $data['birth_date'] : 0;
@@ -82,6 +84,26 @@ class DirectorRepository extends AbstractRepository implements DirectorRepositor
     
     public function filterByTerm($term){
         return $this->model->where('name','LIKE',"%".$term."%")->limit(10)->select('id','name')->get();
+    }
+    
+    public function findIdByName($name){
+        return $this->model->where('lowercase','=',$name)->select('id')->first();
+    }
+    
+    public function stringToArrayId($str){
+        if($str != ''){
+            $names = explode(',',$str);
+            $ids = Array();
+            foreach($names as $name){
+                if(!is_null($director = $this->findIdByName($name))){
+                    $ids[] = $director->id;
+                }else{
+                    $director = $this->create(['name'=>$name]);
+                    $ids[] = $director->id;
+                }
+            }
+            return $ids;
+        }
     }
 
     public function getForm()

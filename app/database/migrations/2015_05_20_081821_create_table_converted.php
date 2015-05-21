@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableFilmsCategories extends Migration {
+class CreateTableConverted extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTableFilmsCategories extends Migration {
 	public function up()
 	{
 		//
-		if(!Schema::hasTable('films_categories')){
-			Schema::create('films_categories',function(Blueprint $table){
+		if(!Schema::hasTable('converted')){
+			Schema::create('converted',function(Blueprint $table){
 				$table->increments('id');
-				$table->integer('film_id');
-				$table->integer('category_id');
+				$table->string('code');
+				$table->string('value');
 				$table->timestamps();
 			});
 		}
@@ -31,8 +31,8 @@ class CreateTableFilmsCategories extends Migration {
 	public function down()
 	{
 		//
-		if(Schema::hasTable('films_categories')){
-			Schema::drop('films_categories');
+		if(Schema::hasTable('converted')){
+			Schema::drop('converted');
 		}
 	}
 

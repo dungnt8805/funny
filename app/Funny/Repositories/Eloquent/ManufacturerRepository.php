@@ -3,6 +3,7 @@ namespace Funny\Repositories\Eloquent;
 
 use Funny\Repositories\ManufacturerRepositoryInterface;
 use Funny\Manufacturer;
+use Str;
 
 class ManufacturerRepository extends AbstractRepository implements ManufacturerRepositoryInterface{
     
@@ -33,7 +34,15 @@ class ManufacturerRepository extends AbstractRepository implements ManufacturerR
      * @return \Funny\Manufacturer
      */
 
-    public function create(array $data, $full = false){}
+    public function create(array $data, $full = false){
+        $model = $this->getNew();
+        $model->name = e($data['name']);
+        $model->slug = Str::slug($model->name);
+        $model->lowercase = Str::lower($model->name);
+        
+        $model->save();
+        return $model;
+    }
 
     /**
      * Update an specified actor from database
@@ -43,4 +52,38 @@ class ManufacturerRepository extends AbstractRepository implements ManufacturerR
      * @return \Funny\Manufacturer
      */
     public function update($id, array $data){}
+    
+    /**
+     * Find a manufacturer from database by name
+     * 
+     * @param string $name
+     * 
+     * @return \Funny\Manufacturer
+     */
+    public function findIdByName($name){
+        return $this->model->where('lowercase','=',$name)->select('id')->first();
+    }
+    
+    /**
+     * Find manufacturers from database by name
+     * 
+     * @param array names
+     * 
+     * @return array
+     */
+    public function stringToArrayId($str){
+        if($str != ''){
+            $names = explode(',',$str);
+            $ids = Array();
+            foreach($names as $name){
+                if(!is_null($manu = $this->findIdByName($name))){
+                    $ids[] = $manu->id;
+                }else{
+                    $manu = $this->create(['name'=>$name]);
+                    $ids[] = $manu->id;
+                }
+            }
+            return $ids;
+        }
+    }
 }
