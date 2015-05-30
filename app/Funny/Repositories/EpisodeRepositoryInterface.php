@@ -46,6 +46,14 @@ interface EpisodeRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Collection|\Funny\Episode
      */
     public function listByFilmId($film_id);
+    
+    /**
+     * return max episode of a film
+     * 
+     * @param int $film_id
+     * @return int $position
+     */
+    public function getMaxOrder($film_id);
 
     public function inserts(array $data);
 }

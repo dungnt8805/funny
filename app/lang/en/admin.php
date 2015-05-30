@@ -40,7 +40,8 @@ return [
         'episode' => 'Episode',
         'url' => 'Url',
         'subtitle' => 'Subtitle',
-        'error' => 'Error'
+        'error' => 'Error',
+        
     ],
     'actions' => [
         'actions' => 'Actions',
@@ -61,9 +62,10 @@ return [
         'add' => 'Add new Nation',
         'save' => 'Save Nation'
     ],
-    'films' => ['index' => 'Films', 'add' => 'Add New Film', 'edit' => 'Edit Film Information', 'save' => 'Save Film'],
+    'films' => ['index' => 'Films', 'add' => 'Add New Film', 'edit' => 'Edit Film Information', 'save' => 'Save Film','information'=>'Film Information'],
     'episodes' => ['index' => 'Episodes', 'add' => 'Add New Episode', 'edit' => 'Edit Episode', 'save' => 'Save Episode'],
     'errors' => [
-        'not_found' => ['film' => 'Film Not Found']
+        
+        'not_found' => ['film' => 'Film Not Found','episode'=>'Episode Not Found']
     ]
 ];

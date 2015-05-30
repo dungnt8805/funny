@@ -91,27 +91,6 @@ class DirectorRepository extends AbstractRepository implements DirectorRepositor
     {
         return $this->model->where('lowercase', '=', $name)->select('id')->first();
     }
-
-    public function stringToArrayId($str)
-    {
-        if ($str != '') {
-            $names = explode(',', $str);
-            $ids = Array();
-            foreach ($names as $name) {
-                if (!is_null($director = $this->findBySlug(Str::slug($name)))) {
-                    $ids[] = $director->id;
-                } else {
-                    $director = $this->create(['name' => $name]);
-                    $ids[] = $director->id;
-                }
-            }
-            return $ids;
-        }
-    }
-    
-    public function findIdByName($name){
-        return $this->model->where('lowercase','=',$name)->select('id')->first();
-    }
     
     public function stringToArrayId($str){
         if($str != ''){

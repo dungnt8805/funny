@@ -50,7 +50,7 @@
                     @foreach($data['films'] as $film)
                         <tr rel="{{ $film->id }}">
                             <td></td>
-                            <td>{{HTML::image(tim_thumb($film->thumbnail,51,70))}}</td>
+                            <td width="60px;">{{HTML::image(tim_thumb($film->thumbnail,51,70),$film->title,['class'=>'img-thumbnail'])}}</td>
                             <td>
                                 <div class="col-sm-9">
                                     <strong>
@@ -62,7 +62,7 @@
                                     <a class="btn btn-xs btn-info" href="{{route('admin.episodes.list',$film->id)}}">
                                         <i class="fa fa-list"></i> Episodes
                                     </a>
-                                    <a class="btn btn-xs btn-success" href="">
+                                    <a class="btn btn-xs btn-success" href="{{route('admin.episodes.new',$film->id)}}">
                                         <i class="fa fa-plus"></i> Add new episode
                                     </a>
                                 </div>

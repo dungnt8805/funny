@@ -10,7 +10,7 @@ namespace Funny\Repositories\Eloquent;
 
 use Funny\Episode;
 use Funny\Repositories\EpisodeRepositoryInterface;
-
+use Funny\Services\Forms\EpisodeForm;
 class EpisodeRepository extends AbstractRepository implements EpisodeRepositoryInterface
 {
     /**
@@ -43,10 +43,15 @@ class EpisodeRepository extends AbstractRepository implements EpisodeRepositoryI
 
     public function create(array $data)
     {
+        
         $episode = $this->getNew();
 
         $episode->film_id = $data['film_id'];
-
+        $episode->position = $data['position'];
+        $episode->url = $data['url'];
+        $episode->subtitle = empty($data['subtitle'])?:$data['subtitle'];
+        $episode->save();
+        return $episode;
     }
 
 
@@ -60,6 +65,11 @@ class EpisodeRepository extends AbstractRepository implements EpisodeRepositoryI
     public function update($id, array $data)
     {
         $episode = $this->findById($id);
+        $episode->position = $data['position'];
+        $episode->url = $data['url'];
+        $episode->subtitle = empty($data['subtitle'])?:$data['subtitle'];
+        $episode->save();
+        return $episode;
 
     }
 
@@ -73,9 +83,21 @@ class EpisodeRepository extends AbstractRepository implements EpisodeRepositoryI
     {
         return $this->model->where('film_id', '=', $film_id)->orderBy('position', 'ASC')->paginate(20);
     }
+    /**
+     * return max episode of a film
+     * 
+     * @param int $film_id
+     * @return int $position
+     */
+    public function getMaxOrder($film_id){
+        return $this->model->where('film_id','=',$film_id)->max('position');
+    }
 
     public function inserts(array $data)
     {
         $this->model->insert($data);
+    }
+    public function getForm(){
+        return new EpisodeForm;
     }
 }

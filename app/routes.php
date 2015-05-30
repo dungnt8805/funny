@@ -46,6 +46,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     # HomesController
     Route::get('/', ['as' => 'frontend.homes.index', 'uses' => 'HomesController@getIndex']);
     #
+    Route::get('films',['as'=>'frontend.films.index','uses'=>'FilmsController@getIndex']);
     Route::get('category/{slug}', ['as' => 'frontend.category.slug', 'uses' => 'CategoriesController@getSlug']);
 
     Route::get('episode/{id}/{slug}', ['as' => 'frontend.episodes.view', 'uses' => 'EpisodesController@getView']);

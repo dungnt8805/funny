@@ -51,11 +51,5 @@ interface FilmRepositoryInterface
      */
     public function findAll(array $data);
     
-    /**
-     * Get categories of one object from database 
-     * 
-     * 
-     * 
-     */
-     public function categories();
+
 }

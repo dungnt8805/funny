@@ -7,4 +7,5 @@
  */
 return [
     'homepage' => 'Home',
+    'maybe_you_like'=>'Maybe you like',
 ];

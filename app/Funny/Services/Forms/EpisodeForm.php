@@ -10,5 +10,5 @@ namespace Funny\Services\Forms;
 
 
 class EpisodeForm extends AbstractForm{
-
+    protected $rules = ['url'=>'required'];
 }

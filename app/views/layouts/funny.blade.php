@@ -83,7 +83,7 @@
     </div>
 </header>
 <main id="content" role="main" tabindex="-1">
-    <div class="container">
+    <div class="container" id="main">
         @yield('content')
     </div>
 </main>

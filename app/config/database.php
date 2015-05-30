@@ -54,9 +54,9 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => getenv('IP'),
 			'database'  => 'funny',
-			'username'  => 'root',
+			'username'  => getenv('C9_USER'),
 			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',

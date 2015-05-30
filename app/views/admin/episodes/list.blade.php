@@ -5,13 +5,25 @@
         <div class="page-header">
             <h1>{{trans('admin.episodes.index')}}
                 <span class="pull-right">
-                    <a href="{{route('admin.episodes.new')}}"
+                    <a href="{{route('admin.episodes.new',$data['film']->id)}}"
                        class="btn btn-primary btn-lg">{{trans('admin.episodes.add')}}</a>
                 </span>
             </h1>
         </div>
         <div class="col-lg-2">
-
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="2">
+                            {{trans('admin.films.information')}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>{{trans('admin.general.title')}}</td>
+                        <td>{{$data['film']->title}}</td>
+                    </tr>
+                </thead>
+            </table>
         </div>
         <div class="col-lg-9">
             <table class="table table-hover table-bordered">
