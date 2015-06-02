@@ -30,4 +30,6 @@ class HomesController extends FrontendController
         $data['films'] = $films;
         return View::make('frontend/homes/index',compact('data'));
     }
+    
+    
 }

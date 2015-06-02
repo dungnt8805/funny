@@ -6,8 +6,8 @@ use Input;
 use Funny\Film;
 use Funny\Category;
 use Funny\Nation;
-
-class FilmsController extends BaseController{
+use View;
+class FilmsController extends FrontendController{
 
     public function getIndex(){
         $is_series = Input::get('is_series',0);
@@ -33,8 +33,10 @@ class FilmsController extends BaseController{
             $query = $query->where('nation_id','=',$country->id);
         }
         
-        $films = $query->paginate(20)->appends($appends);
-            
+        $films = $query->paginate(24)->appends($appends);
+        
+        $data['films'] = $films;
+        return View::make('frontend/films/index',compact('data'));
     }
     
     public function getDetails(){

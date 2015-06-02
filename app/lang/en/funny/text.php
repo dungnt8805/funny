@@ -8,4 +8,5 @@
 return [
     'homepage' => 'Home',
     'maybe_you_like'=>'Maybe you like',
+    'toogle_pagination'=>'Other Page'
 ];

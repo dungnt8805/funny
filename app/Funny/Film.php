@@ -44,4 +44,8 @@ class Film extends Model
     {
         return $this->hasMany('Episode', 'film_id', 'id');
     }
+    
+    public function link(){
+        
+    }
 }

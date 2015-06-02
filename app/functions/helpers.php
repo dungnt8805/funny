@@ -63,3 +63,34 @@ if (!function_exists('tim_thumb')) {
         return Config::get('app.url') . 'thumb.php?src=' . urlencode($url) . '&w=' . $width . '&h=' . $height . '&zc=' . $zc;
     }
 }
+if (!function_exists('vi_cut_string')) {
+    /**
+     * Limit the number of characters in a string.
+     *
+     * @param  string $value
+     * @param  int $limit
+     * @param  string $end
+     * @return string
+     */
+    function vi_cut_string($value, $limit = 100, $end = '...')
+    {
+        $split = explode(' ', $value);
+        $result = array();
+        $check = '';
+        $count = 0;
+        foreach ($split as $word) {
+            $count++;
+            if (trim($word) != "" && strlen($check) < $limit) {
+                $check .= ' ' . strtolower(Str::slug($word));
+                $result[] = $word;
+            }
+        }
+
+        $result = implode(' ', $result);
+
+        if ($count >= count($split)) {
+            $result .= $end;
+        }
+        return $result;
+    }
+}
